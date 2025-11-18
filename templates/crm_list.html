@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>CRM Test</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body class="bg-light p-4">
+        <div class="container bg-white p-4 shadow rounded">
+            <h2 class="mb-4">CRM Customers</h2>
+            
+            <form class="row g-3 mb-4">
+                <div class="col-auto">
+                    <input type="text" name="name" class="form-control" placeholder="Buscar por nombre...">
+                </div>
+                <div class="col-auto">
+                    <select name="birthday_filter" class="form-select">
+                        <option value="">Todos los cumpleaños</option>
+                        <option value="this_week">Este mes (Demo)</option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <select name="sort" class="form-select">
+                        <option value="name">Ordenar: Nombre</option>
+                        <option value="company">Ordenar: Empresa</option>
+                        <option value="last_interaction">Ordenar: Última Interacción</option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </form>
+
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Compañía</th>
+                        <th>Cumpleaños</th>
+                        <th>Última Interacción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customers %}
+                    <tr>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.company.name }}</td>
+                        <td>{{ customer.birth_date|date:"F j" }}</td> 
+                        <td>
+                            {% if customer.last_interaction_date %}
+                                {{ customer.last_interaction_date|timesince }} ago 
+                                <span class="badge bg-info text-dark">{{ customer.last_interaction_type }}</span>
+                            {% else %}
+                                <span class="text-muted">Sin interacción</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
