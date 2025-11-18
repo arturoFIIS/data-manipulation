@@ -12,8 +12,10 @@ Aplicación Django que modela un CRM con:
 
 ## Cómo ejecutar
 0. Crear entorno y activar
+   ```
    python -m venv venv
-   # (Windows: venv\Scripts\activate | Mac/Linux: source venv/bin/activate)
+   ```
+   (Windows: venv\Scripts\activate | Mac/Linux: source venv/bin/activate)
 
 1. **Instalar dependencias:**
    ```
